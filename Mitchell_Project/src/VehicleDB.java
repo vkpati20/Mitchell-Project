@@ -17,22 +17,32 @@ public class VehicleDB {
 	
 	public VehicleDB() {
 		allVehicles = new ArrayList<>();
-		//index = -1;
 	}
 	
 	
 	public void Create(int year, String Make, String Model) {
 		Vehicle v = new Vehicle(year, Make, Model);
 		allVehicles.add(v);
-		//index++;
 
-//		mapToVehicle.put(v.getId(), index);
 	}
 	
 	public void Delete(int id) {
-		//int pos = mapToVehicle.get(id);
 		int pos = getPosition(id);
 		allVehicles.remove(pos);
+	}
+	
+	public List<Vehicle> Get() {
+		return allVehicles;
+	}
+	
+	public Vehicle Get(int id) {
+		for(int i = 0; i < allVehicles.size(); i++)
+		{
+			if(allVehicles.get(i).getId() == id)
+				return allVehicles.get(i);
+		}
+		
+		return null;
 	}
 
 
@@ -43,6 +53,8 @@ public class VehicleDB {
 		}
 		return -1;
 	}
+	
+	
 	
 	
 }

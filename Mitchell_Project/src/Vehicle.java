@@ -20,7 +20,7 @@ public class Vehicle {
 	public Vehicle(int Year, String Make, String Model) {
 		
 		this.Id = ai.incrementAndGet();
-		this.Year = -1;
+		this.Year = Year;
 		this.Make= Make;
 		this.Model= Model;
 	}
@@ -28,7 +28,7 @@ public class Vehicle {
 	
 	//Id-------------
 	public int getId() {
-		return Id;
+		return this.Id;
 	}
 	public void setId(int Id) {
 		this.Id = Id;
@@ -36,15 +36,16 @@ public class Vehicle {
 	
 	//Year------------
 	public int getYear() {
-		return Year;
+		return this.Year;
 	}
+	
 	public void setYear(int Year) {
 		this.Year = Year;
 	}
 	
 	//Make------------
 	public String getMake() {
-		return Make;
+		return this.Make;
 	}
 	public void setMake(String Make) {
 		this.Make = Make;
@@ -52,13 +53,11 @@ public class Vehicle {
 	
 	//Model-------------
 	public String getModel() {
-		return Model;
+		return this.Model;
 	}
 	public void setModel(String Model) {
 		this.Model = Model;
 	}
-	
-	
 	
 	
 }
