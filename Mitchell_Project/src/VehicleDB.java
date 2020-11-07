@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+/*
+ * Comments
+ * 
+ * 		//I'm trying to store where this particular object is located in the array
+		//so in Delete and Update, I don't have to traverse the objects. Instead, 
+		//I can just go to that specific index by using HashMap which uses vehicle's id to map it to 
+		//the index.
+ */
+public class VehicleDB {
+	static List<Vehicle> allVehicles;
+//	static HashMap<Integer, Integer> mapToVehicle;//to make delete and update operations faster
+//	static int index;
+	
+	
+	public VehicleDB() {
+		allVehicles = new ArrayList<>();
+		//index = -1;
+	}
+	
+	
+	public void Create(int year, String Make, String Model) {
+		Vehicle v = new Vehicle(year, Make, Model);
+		allVehicles.add(v);
+		//index++;
+
+//		mapToVehicle.put(v.getId(), index);
+	}
+	
+	public void Delete(int id) {
+		//int pos = mapToVehicle.get(id);
+		int pos = getPosition(id);
+		allVehicles.remove(pos);
+	}
+
+
+	private int getPosition(int id) {
+		for(int i = 0; i < allVehicles.size(); i++)
+		{
+			if(allVehicles.get(i).getId() == id) return i;
+		}
+		return -1;
+	}
+	
+	
+}

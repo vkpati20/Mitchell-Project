@@ -1,9 +1,30 @@
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Vehicle {
 	private int Id;
 	private int Year;
 	private String Make;
 	private String Model;
+	
+	private static AtomicInteger ai = new AtomicInteger(10);
+
+	public Vehicle() {
+		
+		this.Id = ai.incrementAndGet();
+		this.Year = -1;
+		this.Make="Generic";
+		this.Model="Generic";
+	}
+	
+	public Vehicle(int Year, String Make, String Model) {
+		
+		this.Id = ai.incrementAndGet();
+		this.Year = -1;
+		this.Make= Make;
+		this.Model= Model;
+	}
+	
 	
 	//Id-------------
 	public int getId() {
@@ -36,6 +57,8 @@ public class Vehicle {
 	public void setModel(String Model) {
 		this.Model = Model;
 	}
+	
+	
 	
 	
 }
