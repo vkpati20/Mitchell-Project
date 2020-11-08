@@ -55,8 +55,11 @@ public class VehicleTest {
 	public static void Create(VehicleDB vehicle) {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
-		int year = -1;
+		int id = -1, year = -1;
 		String make="", model=""; 
+		
+		System.out.print("Enter ID: ");
+		id = input.nextInt();
 		
 		System.out.print("Enter Year: ");
 		year = input.nextInt();
@@ -68,7 +71,7 @@ public class VehicleTest {
 		System.out.print("Enter Model: ");
 		model = input.nextLine();
 		
-		vehicle.Create(year, make, model);
+		vehicle.Create(id, year, make, model);
 		
 		
 		

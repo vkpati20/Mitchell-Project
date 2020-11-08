@@ -11,17 +11,18 @@ class AutomatedTesting {
 	@BeforeEach
 	public void setup() {
 		vehicleTestDB = new VehicleDB();
-		vehicleTestDB.Create(2002, "Nissian", "Altima");
-		vehicleTestDB.Create(2012, "Honda", "Civic");
-		vehicleTestDB.Create(2016, "Toyota", "Corolla");
+		vehicleTestDB.Create(1, 2002, "Nissian", "Altima");
+		vehicleTestDB.Create(2, 2012, "Honda", "Civic");
+		vehicleTestDB.Create(3, 2016, "Toyota", "Corolla");
 	}
 	
 	@Test
 	public void testCreate() {
+		int id = 4;
 		int year = 2019;
 		String Make = "BMW";
 		String Model = "i8";
-		Vehicle testVehicle = vehicleTestDB.Create(year, Make, Model);
+		Vehicle testVehicle = vehicleTestDB.Create(id,year, Make, Model);
 		int size = vehicleTestDB.Size();
 		
 		/*
@@ -56,6 +57,18 @@ class AutomatedTesting {
 		assertEquals(dummy.getMake(), testVehicle.getMake());
 		assertEquals(dummy.getModel(), testVehicle.getModel());
 	}
+	
+	@Test
+	public void testDelete() {
+		int delete_id = 1;
+		int exist_id = 3;
+		vehicleTestDB.Delete(delete_id);
+		
+		assertEquals(false, vehicleTestDB.VehicleExist(delete_id));
+		assertEquals(true,vehicleTestDB.VehicleExist(exist_id));
+	}
+	
+	
 	
 	
 

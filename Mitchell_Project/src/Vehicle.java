@@ -7,19 +7,17 @@ public class Vehicle {
 	private String Make;
 	private String Model;
 	
-	private static AtomicInteger ai = new AtomicInteger(10);
-
 	public Vehicle() {
 		
-		this.Id = ai.incrementAndGet();
+		this.Id = -1;
 		this.Year = -1;
 		this.Make="Generic";
 		this.Model="Generic";
 	}
 	
-	public Vehicle(int Year, String Make, String Model) {
+	public Vehicle(int Id, int Year, String Make, String Model) {
 		
-		this.Id = ai.incrementAndGet();
+		this.Id = Id;
 		this.Year = Year;
 		this.Make= Make;
 		this.Model= Model;
