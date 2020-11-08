@@ -60,4 +60,16 @@ public class Vehicle {
 	}
 	
 	
+	public String toString() {
+		return(
+				"["
+				+ "id: " + this.getId() 
+				+ ",\tYear: " + this.getYear() 
+				+ ",\tMake: " + this.getMake() 
+				+ ",\tModel: " + this.getModel() 
+				+ "]"
+				);
+	}
+	
+	
 }

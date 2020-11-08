@@ -20,9 +20,10 @@ public class VehicleDB {
 	}
 	
 	
-	public void Create(int year, String Make, String Model) {
+	public Vehicle Create(int year, String Make, String Model) {
 		Vehicle v = new Vehicle(year, Make, Model);
 		allVehicles.add(v);
+		return v;
 
 	}
 	
@@ -50,7 +51,7 @@ public class VehicleDB {
 	}
 	
 	
-	public void Update(int id, int year, String make, String model) {
+	public Vehicle Update(int id, int year, String make, String model) {
 		Vehicle vehicle = Get(id);
 		if(year!= -1)
 			vehicle.setYear(year);
@@ -60,6 +61,8 @@ public class VehicleDB {
 		
 		if(model.length()!=0)
 			vehicle.setModel(model);
+		
+		return vehicle;
 		
 	}
 
@@ -71,7 +74,9 @@ public class VehicleDB {
 		return -1;
 	}
 	
-	
+	public int Size() {
+		return allVehicles.size();
+	}
 	
 	
 }
