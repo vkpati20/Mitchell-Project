@@ -68,6 +68,17 @@ class AutomatedTesting {
 		assertEquals(true,vehicleTestDB.VehicleExist(exist_id));
 	}
 	
+	@Test
+	public void testGet() {
+		int id = 2;
+		Vehicle v = vehicleTestDB.Get(2);
+		assertEquals(2, v.getId());
+		assertEquals(2012, v.getYear());
+		assertEquals("Honda", v.getMake());
+		assertEquals("Civic", v.getModel());
+		
+	}
+	
 	
 	
 	
