@@ -77,14 +77,11 @@ public class VehicleTest {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		
-		int id = -1;
+		int id = -1, year=-1;
+		String make="", model="";
 		
 		System.out.print("Enter vehicle id: ");
 		id = input.nextInt();
-		
-		Vehicle vehicle = vehicleDB.Get(id);
-		
-		
 		
 		String change="";
 
@@ -97,8 +94,7 @@ public class VehicleTest {
 		
 		if(change.equals("y") || change.equals("yes")) {
 			System.out.print("Enter Year: ");
-			int year = input.nextInt();
-			vehicle.setYear(year);
+			year = input.nextInt();
 		}
 		
 		input.nextLine();
@@ -109,8 +105,7 @@ public class VehicleTest {
 		
 		if(change.equals("y") || change.equals("yes")) {
 			System.out.print("Enter Year: ");
-			String make = input.nextLine();
-			vehicle.setMake(make);
+			make = input.nextLine();
 
 		}
 		
@@ -122,10 +117,11 @@ public class VehicleTest {
 		
 		if(change.equals("y") || change.equals("yes")) {
 			System.out.print("Enter Year: ");
-			String model = input.nextLine();
-			vehicle.setModel(model);
+			model = input.nextLine();
 
 		}
+		vehicleDB.Update(id, year, make, model);
+		
 	}
 	
 	

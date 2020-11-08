@@ -31,9 +31,11 @@ public class VehicleDB {
 		allVehicles.remove(pos);
 	}
 	
+	
 	public List<Vehicle> Get() {
 		return allVehicles;
 	}
+	
 	
 	public Vehicle Get(int id) {
 		for(int i = 0; i < allVehicles.size(); i++)
@@ -43,6 +45,22 @@ public class VehicleDB {
 		}
 		
 		return null;
+	}
+	
+	
+	public void Update(int id, int year, String make, String model) {
+		Vehicle vehicle = Get(id);
+		if(year!= -1)
+			vehicle.setYear(year);
+		
+		if(make.length()!=0)
+			vehicle.setMake(make);
+		
+		if(model.length()!=0)
+			vehicle.setModel(model);
+		
+		
+		
 	}
 
 
