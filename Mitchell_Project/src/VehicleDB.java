@@ -26,9 +26,11 @@ public class VehicleDB {
 
 	}
 	
-	public void Delete(int id) {
+	public int Delete(int id) {
 		int pos = getPosition(id);
-		allVehicles.remove(pos);
+		if(pos!=-1)
+			allVehicles.remove(pos);
+		return pos;
 	}
 	
 	
@@ -59,10 +61,7 @@ public class VehicleDB {
 		if(model.length()!=0)
 			vehicle.setModel(model);
 		
-		
-		
 	}
-
 
 	private int getPosition(int id) {
 		for(int i = 0; i < allVehicles.size(); i++)

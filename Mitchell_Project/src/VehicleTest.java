@@ -126,7 +126,20 @@ public class VehicleTest {
 	
 	
 	public static void Get(VehicleDB vehicleDB) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter id: ");
+		int id = input.nextInt();
 		
+		Vehicle vehicle = vehicleDB.Get(id);
+		
+		System.out.println(
+				"["
+				+ "id: " + vehicle.getId() 
+				+ ",\tYear: " + vehicle.getYear() 
+				+ ",\tMake: " + vehicle.getMake() 
+				+ ",\tModel: " + vehicle.getModel() 
+				+ "]"
+				);		
 	}
 
 	public static void Getall(VehicleDB vehicleDB) {
@@ -144,6 +157,12 @@ public class VehicleTest {
 	}
 	
 	public static void Delete(VehicleDB vehicleDB) {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter id: ");
+		int id = input.nextInt();
 		
+		int temp = vehicleDB.Delete(id);
+		
+		if(temp == -1) System.out.println("No such Vehicle exist!");
 	}
 }
