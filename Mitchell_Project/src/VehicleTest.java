@@ -55,8 +55,11 @@ public class VehicleTest {
 	public static void Create(VehicleDB vehicle) {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
-		int year = -1;
+		int id = -1, year = -1;
 		String make="", model=""; 
+		
+		System.out.print("Enter ID: ");
+		id = input.nextInt();
 		
 		System.out.print("Enter Year: ");
 		year = input.nextInt();
@@ -68,7 +71,12 @@ public class VehicleTest {
 		System.out.print("Enter Model: ");
 		model = input.nextLine();
 		
-		vehicle.Create(year, make, model);
+//		try {
+		vehicle.Create(id, year, make, model);
+//		}
+//		catch(IllegalArgumentException e) {
+			System.out.println("Exception!!");
+//		}
 		
 		
 		
@@ -104,7 +112,7 @@ public class VehicleTest {
 		}while( !(change.equals("y") || change.equals("n")));
 		
 		if(change.equals("y") || change.equals("yes")) {
-			System.out.print("Enter Year: ");
+			System.out.print("Enter Make: ");
 			make = input.nextLine();
 
 		}
@@ -116,7 +124,7 @@ public class VehicleTest {
 		}while( !(change.equals("y") || change.equals("n")));
 		
 		if(change.equals("y") || change.equals("yes")) {
-			System.out.print("Enter Year: ");
+			System.out.print("Enter Model: ");
 			model = input.nextLine();
 
 		}
@@ -144,6 +152,10 @@ public class VehicleTest {
 
 	public static void Getall(VehicleDB vehicleDB) {
 		List<Vehicle> vehicles = vehicleDB.Get();
+		if(vehicles.size() == 0) {
+			System.out.println("No Vehicle Objects created!");
+			return;
+		}
 		for(Vehicle vehicle: vehicles) {
 			System.out.println(
 					"["

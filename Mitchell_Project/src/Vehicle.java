@@ -7,22 +7,19 @@ public class Vehicle {
 	private String Make;
 	private String Model;
 	
-	private static AtomicInteger ai = new AtomicInteger(10);
-
 	public Vehicle() {
 		
-		this.Id = ai.incrementAndGet();
+		this.Id = -1;
 		this.Year = -1;
 		this.Make="Generic";
 		this.Model="Generic";
 	}
 	
-	public Vehicle(int Year, String Make, String Model) {
-		
-		this.Id = ai.incrementAndGet();
-		this.Year = Year;
-		this.Make= Make;
-		this.Model= Model;
+	public Vehicle(int Id, int Year, String Make, String Model) {
+		this.setId(Id);
+		this.setYear(Year);
+		this.setMake(Make);
+		this.setModel(Model);
 	}
 	
 	
@@ -31,7 +28,10 @@ public class Vehicle {
 		return this.Id;
 	}
 	public void setId(int Id) {
-		this.Id = Id;
+		if(Id>=0)  
+			this.Id = Id; 
+		else 
+			throw new IllegalArgumentException("Invalid Action");
 	}
 	
 	//Year------------
@@ -40,7 +40,10 @@ public class Vehicle {
 	}
 	
 	public void setYear(int Year) {
-		this.Year = Year;
+		if(Year>=1950 && Year<=2050)  
+			this.Year = Year; 
+		else 
+			throw new IllegalArgumentException("Invalid Action");	
 	}
 	
 	//Make------------
@@ -48,7 +51,10 @@ public class Vehicle {
 		return this.Make;
 	}
 	public void setMake(String Make) {
-		this.Make = Make;
+		if(Make!=null && Make.length()>0)
+			this.Make = Make;
+		else
+			throw new IllegalArgumentException("Invalid Action");
 	}
 	
 	//Model-------------
@@ -56,7 +62,22 @@ public class Vehicle {
 		return this.Model;
 	}
 	public void setModel(String Model) {
-		this.Model = Model;
+		if(Model!=null && Model.length()>0)
+			this.Model = Model;
+		else
+			throw new IllegalArgumentException("Invalid Action");
+	}
+	
+	
+	public String toString() {
+		return(
+				"["
+				+ "id: " + this.getId() 
+				+ ",\tYear: " + this.getYear() 
+				+ ",\tMake: " + this.getMake() 
+				+ ",\tModel: " + this.getModel() 
+				+ "]"
+				);
 	}
 	
 	
