@@ -87,14 +87,21 @@ class AutomatedTesting {
 	@Test
 	public void testException() {
 		int id = 4;
-		int year = 2019;
+		int year1 = 2019;
 		String Make = "";
 		String Model = "i8";
 	    
-	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year, Make, Model));
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year1, Make, Model));
 
-	    
-	
+	    int year2 = 1900;
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year2, Make, Model));
+
+		String Make2 = null;
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year2, Make2, Model));
+
+	    String Model3 = null;
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year2, Make2, Model3));
+
 	}
 	
 	
