@@ -51,6 +51,38 @@ public class VehicleDB {
 	}
 	
 	
+	/*
+	 * This method takes a string, a Make or Model name.
+	 * It searches the Make field of all vehicles objects and returns the matching objects
+	 * 
+	 * If it's not a Make field, then it searches Model field of all vehicles objects 
+	 * and returns the matching objects
+	 */
+	public List<Vehicle> Get(String temp) {
+		List<Vehicle> Vehicles = new ArrayList<>();
+		boolean isMake = false;
+		for(int i = 0; i < allVehicles.size(); i++)
+		{
+			if(allVehicles.get(i).getMake().equals(temp)) {
+				isMake = true;
+				Vehicles.add(allVehicles.get(i));
+			}
+		}
+		if(isMake == false)
+		{
+			for(int i = 0; i < allVehicles.size(); i++)
+			{
+				if(allVehicles.get(i).getModel().equals(temp)) {
+					Vehicles.add(allVehicles.get(i));
+				}
+			}
+		}
+		
+		return Vehicles;
+	}
+	
+	
+	
 	public Vehicle Update(int id, int year, String make, String model) {
 		Vehicle vehicle = Get(id);
 		if(year!= -1)

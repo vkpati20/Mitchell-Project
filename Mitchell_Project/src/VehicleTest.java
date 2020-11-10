@@ -7,16 +7,17 @@ public class VehicleTest {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 
-	
+		System.out.println("hello".contains("h"));
 		int choice = 0;
 		do {
 			System.out.println("Please select from the following options: ");
 			System.out.println("1: Create a new vehicle");
 			System.out.println("2: Update existing vehicle");
 			System.out.println("3: Delete existing vehicle");
-			System.out.println("4: View a specific vehicle");
-			System.out.println("5: View all vehicles");
-			System.out.println("6: Exit");
+			System.out.println("4: View a specific vehicle by id");
+			System.out.println("5: View a specific vehicle by Make or Model");
+			System.out.println("6: View all vehicles");
+			System.out.println("7: Exit");
 			System.out.print("Choice: ");
 			choice = input.nextInt();
 			System.out.println("");
@@ -33,12 +34,15 @@ public class VehicleTest {
 				Delete(vehicleDB);
 				break;
 			case 4: 
-				Get(vehicleDB);
+				GetbyID(vehicleDB);
 				break;
-			case 5: 
+			case 6: 
 				Getall(vehicleDB);
 				break;
-			case 6:
+			case 5:
+				GetbyValue(vehicleDB);
+				break;
+			case 7:
 				break;
 			default:
 				System.out.println("Please select from 6 options");
@@ -48,10 +52,29 @@ public class VehicleTest {
 			System.out.println("");
 
 			
-		}while(choice!=6);
+		}while(choice!=7);
 
 	}
 	
+	private static void GetbyValue(VehicleDB vehicleDB) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter identification: ");
+		String temp = input.nextLine();
+		
+		List<Vehicle> vehicles = vehicleDB.Get(temp);
+		
+		for(Vehicle vehicle: vehicles) {
+			System.out.println(
+					"["
+					+ "id: " + vehicle.getId() 
+					+ ",\tYear: " + vehicle.getYear() 
+					+ ",\tMake: " + vehicle.getMake() 
+					+ ",\tModel: " + vehicle.getModel() 
+					+ "]"
+					);
+		}
+	}
+
 	public static void Create(VehicleDB vehicle) {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
@@ -71,12 +94,12 @@ public class VehicleTest {
 		System.out.print("Enter Model: ");
 		model = input.nextLine();
 		
-//		try {
+		try {
 		vehicle.Create(id, year, make, model);
-//		}
-//		catch(IllegalArgumentException e) {
+		}
+		catch(IllegalArgumentException e) {
 			System.out.println("Exception!!");
-//		}
+		}
 		
 		
 		
@@ -133,7 +156,7 @@ public class VehicleTest {
 	}
 	
 	
-	public static void Get(VehicleDB vehicleDB) {
+	public static void GetbyID(VehicleDB vehicleDB) {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter id: ");
 		int id = input.nextInt();
