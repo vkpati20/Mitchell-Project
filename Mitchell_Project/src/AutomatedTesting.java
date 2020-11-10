@@ -1,22 +1,20 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.ArrayList;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
 
 class AutomatedTesting {
 	private VehicleDB vehicleTestDB = new VehicleDB();
-	
-	public ExpectedException thrown = ExpectedException.none();
-	
-	
+		
 	@BeforeEach
 	public void setup() {
 		vehicleTestDB = new VehicleDB();
-		vehicleTestDB.Create(1, 2002, "Nissian", "Altima");
-		vehicleTestDB.Create(2, 2012, "Honda", "Civic");
+		vehicleTestDB.Create(1, 2018, "BMW", "Series 7");
+		vehicleTestDB.Create(2, 2012, "Audi", "Sedan");
 		vehicleTestDB.Create(3, 2016, "Toyota", "Corolla");
 	}
 	
@@ -73,14 +71,55 @@ class AutomatedTesting {
 	}
 	
 	@Test
-	public void testGet() {
+	public void testGetbyID() {
 		int id = 2;
 		Vehicle v = vehicleTestDB.Get(2);
 		assertEquals(2, v.getId());
 		assertEquals(2012, v.getYear());
-		assertEquals("Honda", v.getMake());
-		assertEquals("Civic", v.getModel());
+		assertEquals("Audi", v.getMake());
+		assertEquals("Sedan", v.getModel());
+	}
+	
+	
+	@Test
+	public void testGetbyValue() {
+		String text = "BMW";
+		//Creating dummy 
+		vehicleTestDB.Create(4, 2015, "BMW", "Sedan");
+		vehicleTestDB.Create(5, 2012, "BMW", "Series 4");
+
 		
+		//Test 1: Testing Make field
+		List<Vehicle> dummyList1 = new ArrayList<>();
+		dummyList1.add(new Vehicle(1, 2018, "BMW", "Series 7"));
+		dummyList1.add(new Vehicle(4, 2015, "BMW", "Sedan"));
+		dummyList1.add(new Vehicle(5, 2012, "BMW", "Series 4"));
+		
+		List<Vehicle> makeTestList = vehicleTestDB.Get(text);
+		
+		
+		for(int i = 0; i < 3; i++) {
+			assertEquals(dummyList1.get(i).getId(), makeTestList.get(i).getId());
+			assertEquals(dummyList1.get(i).getYear(), makeTestList.get(i).getYear());
+			assertEquals(dummyList1.get(i).getMake(), makeTestList.get(i).getMake());
+			assertEquals(dummyList1.get(i).getModel(), makeTestList.get(i).getModel());
+		}
+		
+		
+		//Test 2: Testing Model field
+		text = "Sedan";
+		List<Vehicle> modelTestList = vehicleTestDB.Get(text);
+		
+		List<Vehicle> dummyList2 = new ArrayList<>();
+		dummyList2.add(new Vehicle(2, 2012, "Audi", "Sedan"));
+		dummyList2.add(new Vehicle(4, 2015, "BMW", "Sedan"));
+	
+		for(int i = 0; i < 2; i++) {
+			assertEquals(dummyList2.get(i).getId(), modelTestList.get(i).getId());
+			assertEquals(dummyList2.get(i).getYear(), modelTestList.get(i).getYear());
+			assertEquals(dummyList2.get(i).getMake(), modelTestList.get(i).getMake());
+			assertEquals(dummyList2.get(i).getModel(), modelTestList.get(i).getModel());
+		}
 	}
 	
 	
