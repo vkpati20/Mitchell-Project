@@ -93,14 +93,15 @@ class AutomatedTesting {
 	    
 	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year1, Make, Model));
 
+	    //I can't use id 4 for the below test cases because in the previous step, Vehicle with object id 4 is not created
 	    int year2 = 1900;
-	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year2, Make, Model));
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Update(1,year2, Make, Model));
 
 		String Make2 = null;
-	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year2, Make2, Model));
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Update(1,year2, Make2, Model));
 
 	    String Model3 = null;
-	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year2, Make2, Model3));
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Update(1,year2, Make2, Model3));
 
 	}
 	

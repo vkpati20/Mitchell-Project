@@ -71,12 +71,12 @@ public class VehicleTest {
 		System.out.print("Enter Model: ");
 		model = input.nextLine();
 		
-		try {
+//		try {
 		vehicle.Create(id, year, make, model);
-		}
-		catch(IllegalArgumentException e) {
+//		}
+//		catch(IllegalArgumentException e) {
 			System.out.println("Exception!!");
-		}
+//		}
 		
 		
 		
@@ -112,7 +112,7 @@ public class VehicleTest {
 		}while( !(change.equals("y") || change.equals("n")));
 		
 		if(change.equals("y") || change.equals("yes")) {
-			System.out.print("Enter Year: ");
+			System.out.print("Enter Make: ");
 			make = input.nextLine();
 
 		}
@@ -124,7 +124,7 @@ public class VehicleTest {
 		}while( !(change.equals("y") || change.equals("n")));
 		
 		if(change.equals("y") || change.equals("yes")) {
-			System.out.print("Enter Year: ");
+			System.out.print("Enter Model: ");
 			model = input.nextLine();
 
 		}
