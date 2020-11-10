@@ -71,7 +71,12 @@ public class VehicleTest {
 		System.out.print("Enter Model: ");
 		model = input.nextLine();
 		
+		try {
 		vehicle.Create(id, year, make, model);
+		}
+		catch(IllegalArgumentException e) {
+			System.out.println("Exception!!");
+		}
 		
 		
 		
@@ -147,6 +152,10 @@ public class VehicleTest {
 
 	public static void Getall(VehicleDB vehicleDB) {
 		List<Vehicle> vehicles = vehicleDB.Get();
+		if(vehicles.size() == 0) {
+			System.out.println("No Vehicle Objects created!");
+			return;
+		}
 		for(Vehicle vehicle: vehicles) {
 			System.out.println(
 					"["

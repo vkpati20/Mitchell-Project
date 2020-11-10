@@ -16,11 +16,19 @@ public class Vehicle {
 	}
 	
 	public Vehicle(int Id, int Year, String Make, String Model) {
-		
+		if(
+			(Make!=null && Make.length()>0)
+			&& (Model!=null && Model.length()>0)
+			&& (Year>=1950 && Year<=2050)
+			) {
 		this.Id = Id;
 		this.Year = Year;
 		this.Make= Make;
 		this.Model= Model;
+		}
+		else {
+		    throw new IllegalArgumentException("Invalid Vehicle Creation");
+		}
 	}
 	
 	

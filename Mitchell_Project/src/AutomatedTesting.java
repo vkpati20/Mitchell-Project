@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
 class AutomatedTesting {
 	private VehicleDB vehicleTestDB = new VehicleDB();
+	
+	public ExpectedException thrown = ExpectedException.none();
+	
 	
 	@BeforeEach
 	public void setup() {
@@ -77,6 +81,20 @@ class AutomatedTesting {
 		assertEquals("Honda", v.getMake());
 		assertEquals("Civic", v.getModel());
 		
+	}
+	
+	
+	@Test
+	public void testException() {
+		int id = 4;
+		int year = 2019;
+		String Make = "";
+		String Model = "i8";
+	    
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year, Make, Model));
+
+	    
+	
 	}
 	
 	
