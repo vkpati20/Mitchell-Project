@@ -20,6 +20,7 @@ class AutomatedTesting {
 		vehicleTestDB.Create(1, 2018, "BMW", "Series 7");
 		vehicleTestDB.Create(2, 2012, "Audi", "Sedan");
 		vehicleTestDB.Create(3, 2016, "Toyota", "Corolla");
+		vehicleTestDB.Create(4, 2017, "BMW", "i7");
 	}
 	
 	/**
@@ -33,7 +34,7 @@ class AutomatedTesting {
 	 */
 	@Test
 	public void testCreate() {
-		int id = 4;
+		int id = 5;
 		int year = 2019;
 		String Make = "BMW";
 		String Model = "i8";
@@ -82,8 +83,8 @@ class AutomatedTesting {
 		Vehicle dummy = new Vehicle();
 		dummy.setId(id);
 		dummy.setYear(newYear);
-		dummy.setMake("Toyota");
-		dummy.setModel("Corolla");
+		dummy.setMake("BMW");
+		dummy.setModel("i7");
 		System.out.println();
 		assertEquals(dummy.getId(), testVehicle.getId());
 		assertEquals(dummy.getYear(), testVehicle.getYear());
@@ -141,16 +142,17 @@ class AutomatedTesting {
 	public void testGetbyValue() {
 		String text = "BMW";
 		//Creating extra instances 
-		vehicleTestDB.Create(4, 2015, "BMW", "Sedan");
-		vehicleTestDB.Create(5, 2012, "BMW", "Series 4");
+		vehicleTestDB.Create(5, 2015, "BMW", "Sedan");
+		vehicleTestDB.Create(6, 2012, "BMW", "Series 4");
 
 		
 		//Test 1: Testing Make field
 			//creating dummylist with expected outcome of Get(Make) method
 		List<Vehicle> dummyList1 = new ArrayList<>();
 		dummyList1.add(new Vehicle(1, 2018, "BMW", "Series 7"));
-		dummyList1.add(new Vehicle(4, 2015, "BMW", "Sedan"));
-		dummyList1.add(new Vehicle(5, 2012, "BMW", "Series 4"));
+		dummyList1.add(new Vehicle(4, 2017, "BMW", "i7"));
+		dummyList1.add(new Vehicle(5, 2015, "BMW", "Sedan"));
+		dummyList1.add(new Vehicle(6, 2012, "BMW", "Series 4"));
 		
 		List<Vehicle> makeTestList = vehicleTestDB.Get(text);
 		
@@ -169,7 +171,7 @@ class AutomatedTesting {
 			//creating dummylist with expected outcome of Get(Model) method
 		List<Vehicle> dummyList2 = new ArrayList<>();
 		dummyList2.add(new Vehicle(2, 2012, "Audi", "Sedan"));
-		dummyList2.add(new Vehicle(4, 2015, "BMW", "Sedan"));
+		dummyList2.add(new Vehicle(5, 2015, "BMW", "Sedan"));
 	
 		
 		List<Vehicle> modelTestList = vehicleTestDB.Get(text);
@@ -187,20 +189,39 @@ class AutomatedTesting {
 		assertTrue(vehicleTestDB.Get(text).isEmpty());
 	}
 	
+	@Test
+	public void testByMakeAndModel() {
+		String make = "BMW";
+		String model = "i7";
+		
+		//Only one BMW i7
+		List<Vehicle> list = vehicleTestDB.Get(make, model);
+		assertEquals(1,list.size());
+		
+		//No BMW M5
+		model = "M5";
+		list = vehicleTestDB.Get(make, model);
+		assertEquals(0,list.size());
+		
+		
+	}
+
+	
+	
 	/**
 	 * testException method checks for exception cases such as providing null values for Make
 	 * or Model and range for year.
 	 */
 	@Test
 	public void testException() {
-		int id = 4;
+		int id = 5;
 		int year1 = 2019;
 		String Make = "";
 		String Model = "i8";
 	    
 	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year1, Make, Model));
 
-	    //I can't use id 4 for the below test cases because in the previous step, Vehicle with object id 4 is not created
+	    //I can't use id 5 for the below test cases because in the previous step, Vehicle with object id 5 is not created
 	    int year2 = 1900;
 	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Update(1,year2, Make, Model));
 

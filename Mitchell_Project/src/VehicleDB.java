@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -157,10 +158,11 @@ public class VehicleDB {
 	 */
 	public List<Vehicle> Get(String s1, String s2){
 		List<Vehicle> Vehicles = this.Get(s1);
-		for(int i = 0; i < Vehicles.size(); i++) {
-			if(!Vehicles.get(i).getModel().equals(s2))
-				Vehicles.remove(i);
-		}
+	    Iterator<Vehicle> itr = Vehicles.iterator();
+	    while (itr.hasNext()) {
+	    	if(!itr.next().getModel().equals(s2))
+	    		itr.remove();
+	    }
 		return Vehicles;
 	}
 	

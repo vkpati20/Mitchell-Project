@@ -21,8 +21,9 @@ public class VehicleTest {
 			System.out.println("3: Delete existing vehicle");
 			System.out.println("4: View a specific vehicle by id");
 			System.out.println("5: View a specific vehicle by Make or Model");
-			System.out.println("6: View all vehicles");
-			System.out.println("7: Exit");
+			System.out.println("6: View a specific vehicle by Make and Model");
+			System.out.println("7: View all vehicles");
+			System.out.println("8: Exit");
 			System.out.print("Choice: ");
 			choice = input.nextInt();
 			System.out.println("");
@@ -41,13 +42,16 @@ public class VehicleTest {
 			case 4: 
 				GetbyID(vehicleDB);
 				break;
-			case 6: 
-				Getall(vehicleDB);
-				break;
 			case 5:
 				GetbyValue(vehicleDB);
 				break;
-			case 7:
+			case 6:
+				GetbyMakeAndModel(vehicleDB);
+				break;
+			case 7: 
+				Getall(vehicleDB);
+				break;
+			case 8:
 				break;
 			default:
 				System.out.println("Please select from 6 options");
@@ -57,10 +61,29 @@ public class VehicleTest {
 			System.out.println("");
 
 			
-		}while(choice!=7);
-
+		}while(choice!=8);
 	}
 	
+	private static void GetbyMakeAndModel(VehicleDB vehicleDB) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter make: ");
+		String make = input.nextLine();
+		System.out.print("Enter make: ");
+		String model = input.nextLine();
+		List<Vehicle> vehicles = vehicleDB.Get(make, model);
+		for(Vehicle vehicle: vehicles) {
+			System.out.println(
+					"["
+					+ "id: " + vehicle.getId() 
+					+ ",\tYear: " + vehicle.getYear() 
+					+ ",\tMake: " + vehicle.getMake() 
+					+ ",\tModel: " + vehicle.getModel() 
+					+ "]"
+					);
+		}
+
+	}
+
 	private static void GetbyValue(VehicleDB vehicleDB) {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter identification: ");
