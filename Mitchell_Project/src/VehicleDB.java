@@ -1,45 +1,66 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-/*
- * Comments
- * 
- * 		//I'm trying to store where this particular object is located in the array
-		//so in Delete and Update, I don't have to traverse the objects. Instead, 
-		//I can just go to that specific index by using HashMap which uses vehicle's id to map it to 
-		//the index.
- */
+
+
 public class VehicleDB {
+	//List to store all instances of Vehicle class
 	static List<Vehicle> allVehicles;
-//	static HashMap<Integer, Integer> mapToVehicle;//to make delete and update operations faster
-//	static int index;
 	
-	
+	/*
+	 * Default Constructor 
+	 * 
+	 * Initializes a new instance of the class VehicleDB and allVehicles list.
+	 */
 	public VehicleDB() {
 		allVehicles = new ArrayList<>();
 	}
 	
-	
-	public Vehicle Create(int id,int year, String Make, String Model) {
-		Vehicle v = new Vehicle(id,year, Make, Model);
+	/**
+	 * Create method creates a new instance of class Vehicles with the given
+	 * fields and stores this new instance in allVehicles() list.
+	 * 
+	 * @param Id: int
+	 * @param Year: int
+	 * @param Make: String
+	 * @param Model: String
+	 * @return
+	 */
+	public Vehicle Create(int Id,int Year, String Make, String Model) {
+		Vehicle v = new Vehicle(Id,Year, Make, Model);
 		allVehicles.add(v);
 		return v;
 
 	}
 	
+	/**
+	 * Delete method removes a Vehicle instance in allVehicles based on id field.
+	 * @param id: int
+	 * @return
+	 */
 	public int Delete(int id) {
+		//pos gets the index of list where the vehicle object with matching id is located.
 		int pos = getPosition(id);
+		
+		//if pos == -1, then Vehicle with this id does not exist. 
 		if(pos!=-1)
 			allVehicles.remove(pos);
+		
 		return pos;
 	}
 	
-	
+	/**
+	 * Get method returns all the Vehicle objects in allVehicles list
+	 * @return
+	 */
 	public List<Vehicle> Get() {
 		return allVehicles;
 	}
 	
-	
+	/**
+	 * Get method returns the Vehicle object with matching id 
+	 * @param id: int
+	 * @return
+	 */
 	public Vehicle Get(int id) {
 		for(int i = 0; i < allVehicles.size(); i++)
 		{
@@ -51,12 +72,15 @@ public class VehicleDB {
 	}
 	
 	
-	/*
-	 * This method takes a string, a Make or Model name.
-	 * It searches the Make field of all vehicles objects and returns the matching objects
+
+	/**
+	 * Get method takes a string (Make or Model name)
+	 * It searches the Make field of all Vehicle objects and returns any matching Vehicle objects
 	 * 
-	 * If it's not a Make field, then it searches Model field of all vehicles objects 
-	 * and returns the matching objects
+	 * If it's not a Make field, then it searches Model field of all Vehicle objects and returns 
+	 * any matching Vehicle objects
+	 * @param temp: String
+	 * @return
 	 */
 	public List<Vehicle> Get(String temp) {
 		List<Vehicle> Vehicles = new ArrayList<>();
@@ -82,7 +106,15 @@ public class VehicleDB {
 	}
 	
 	
-	
+	/**
+	 * Update method updates an existing Vehicle instance with matching id
+	 * 
+	 * @param id: int
+	 * @param year: int
+	 * @param make: String
+	 * @param model: String
+	 * @return
+	 */
 	public Vehicle Update(int id, int year, String make, String model) {
 		Vehicle vehicle = Get(id);
 		if(year!= -1)
@@ -98,6 +130,11 @@ public class VehicleDB {
 		
 	}
 
+	/**
+	 * getPosition returns the index of an Vehicle instance with matching id
+	 * @param id: int
+	 * @return
+	 */
 	private int getPosition(int id) {
 		for(int i = 0; i < allVehicles.size(); i++)
 		{
@@ -106,21 +143,19 @@ public class VehicleDB {
 		return -1;
 	}
 	
+	/**
+	 * Returns the size of the allVehicles list
+	 * @return
+	 */
 	public int Size() {
 		return allVehicles.size();
 	}
 	
+	/**
+	 * Returns allVehicles list
+	 * @return
+	 */
 	public List<Vehicle> AllVehicles(){
 		return allVehicles;
 	}
-
-
-	public boolean VehicleExist(int id) {
-		int x = getPosition(id);
-		
-		return x==-1? false: true;
-	}
-	
-	
-	
 }
