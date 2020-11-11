@@ -1,22 +1,29 @@
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ * This is User driven test. This perpose of this test is for me to manually test a functionality and combination of functionalities 
+ * @author Veerendranath Korrapait
+ */
 public class VehicleTest {
 	public static void main(String[] args) {
 	    VehicleDB vehicleDB = new VehicleDB();
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 
-	
+		System.out.println("hello".contains("h"));
 		int choice = 0;
 		do {
 			System.out.println("Please select from the following options: ");
 			System.out.println("1: Create a new vehicle");
 			System.out.println("2: Update existing vehicle");
 			System.out.println("3: Delete existing vehicle");
-			System.out.println("4: View a specific vehicle");
-			System.out.println("5: View all vehicles");
-			System.out.println("6: Exit");
+			System.out.println("4: View a specific vehicle by id");
+			System.out.println("5: View a specific vehicle by Make or Model");
+			System.out.println("6: View a specific vehicle by Make and Model");
+			System.out.println("7: View all vehicles");
+			System.out.println("8: Exit");
 			System.out.print("Choice: ");
 			choice = input.nextInt();
 			System.out.println("");
@@ -33,12 +40,18 @@ public class VehicleTest {
 				Delete(vehicleDB);
 				break;
 			case 4: 
-				Get(vehicleDB);
+				GetbyID(vehicleDB);
 				break;
-			case 5: 
-				Getall(vehicleDB);
+			case 5:
+				GetbyValue(vehicleDB);
 				break;
 			case 6:
+				GetbyMakeAndModel(vehicleDB);
+				break;
+			case 7: 
+				Getall(vehicleDB);
+				break;
+			case 8:
 				break;
 			default:
 				System.out.println("Please select from 6 options");
@@ -48,10 +61,48 @@ public class VehicleTest {
 			System.out.println("");
 
 			
-		}while(choice!=6);
-
+		}while(choice!=8);
 	}
 	
+	private static void GetbyMakeAndModel(VehicleDB vehicleDB) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter make: ");
+		String make = input.nextLine();
+		System.out.print("Enter make: ");
+		String model = input.nextLine();
+		List<Vehicle> vehicles = vehicleDB.Get(make, model);
+		for(Vehicle vehicle: vehicles) {
+			System.out.println(
+					"["
+					+ "id: " + vehicle.getId() 
+					+ ",\tYear: " + vehicle.getYear() 
+					+ ",\tMake: " + vehicle.getMake() 
+					+ ",\tModel: " + vehicle.getModel() 
+					+ "]"
+					);
+		}
+
+	}
+
+	private static void GetbyValue(VehicleDB vehicleDB) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter identification: ");
+		String temp = input.nextLine();
+		
+		List<Vehicle> vehicles = vehicleDB.Get(temp);
+		
+		for(Vehicle vehicle: vehicles) {
+			System.out.println(
+					"["
+					+ "id: " + vehicle.getId() 
+					+ ",\tYear: " + vehicle.getYear() 
+					+ ",\tMake: " + vehicle.getMake() 
+					+ ",\tModel: " + vehicle.getModel() 
+					+ "]"
+					);
+		}
+	}
+
 	public static void Create(VehicleDB vehicle) {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
@@ -71,12 +122,12 @@ public class VehicleTest {
 		System.out.print("Enter Model: ");
 		model = input.nextLine();
 		
-//		try {
+		try {
 		vehicle.Create(id, year, make, model);
-//		}
-//		catch(IllegalArgumentException e) {
+		}
+		catch(IllegalArgumentException e) {
 			System.out.println("Exception!!");
-//		}
+		}
 		
 		
 		
@@ -133,7 +184,7 @@ public class VehicleTest {
 	}
 	
 	
-	public static void Get(VehicleDB vehicleDB) {
+	public static void GetbyID(VehicleDB vehicleDB) {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter id: ");
 		int id = input.nextInt();

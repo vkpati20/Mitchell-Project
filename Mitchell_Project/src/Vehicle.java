@@ -1,12 +1,12 @@
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Vehicle {
 	private int Id;
 	private int Year;
 	private String Make;
 	private String Model;
 	
+	/*
+	 * Default Constructor 
+	 */
 	public Vehicle() {
 		
 		this.Id = -1;
@@ -15,6 +15,15 @@ public class Vehicle {
 		this.Model="Generic";
 	}
 	
+	/**
+	 * Constructor
+	 * 
+	 * Initializes a new instance of the class Vehicle with the following fields
+	 * @param Id: int
+	 * @param Year: String
+	 * @param Make: String
+	 * @param Model: String
+	 */
 	public Vehicle(int Id, int Year, String Make, String Model) {
 		this.setId(Id);
 		this.setYear(Year);
@@ -23,7 +32,10 @@ public class Vehicle {
 	}
 	
 	
-	//Id-------------
+	
+	/*
+	 * Defining Getters and Setters for fields: Id, Year, Make, Model
+	 */
 	public int getId() {
 		return this.Id;
 	}
@@ -34,11 +46,9 @@ public class Vehicle {
 			throw new IllegalArgumentException("Invalid Action");
 	}
 	
-	//Year------------
 	public int getYear() {
 		return this.Year;
 	}
-	
 	public void setYear(int Year) {
 		if(Year>=1950 && Year<=2050)  
 			this.Year = Year; 
@@ -46,7 +56,6 @@ public class Vehicle {
 			throw new IllegalArgumentException("Invalid Action");	
 	}
 	
-	//Make------------
 	public String getMake() {
 		return this.Make;
 	}
@@ -57,7 +66,6 @@ public class Vehicle {
 			throw new IllegalArgumentException("Invalid Action");
 	}
 	
-	//Model-------------
 	public String getModel() {
 		return this.Model;
 	}
@@ -68,7 +76,7 @@ public class Vehicle {
 			throw new IllegalArgumentException("Invalid Action");
 	}
 	
-	
+	//Returns the values of fields in current object (used for testing purpose)
 	public String toString() {
 		return(
 				"["
