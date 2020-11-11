@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class AutomatedTesting {
 	private VehicleDB vehicleTestDB = new VehicleDB();
 		
-	/*
+	/**
 	 * setup method executes before each test case.
 	 * It initializes vehicleTestDB with predefined values.
 	 */
@@ -22,7 +22,7 @@ class AutomatedTesting {
 		vehicleTestDB.Create(3, 2016, "Toyota", "Corolla");
 	}
 	
-	/*
+	/**
 	 * This method tests Create() method in VehicleDB
 	 * Inside this method, testVehicle dummy instance of Vehicle is created.
 	 * 
@@ -47,10 +47,16 @@ class AutomatedTesting {
 		 * Below test is checking whether the last element in list is the  newly created vehicle object
 		 */
 		assertEquals(vehicleTestDB.Get().get(size-1), testVehicle);
+		
+		//Creating a Vehicle instance with existing id
+		testVehicle = vehicleTestDB.Create(1,year, Make, Model);
+			//Vehicle with id = 1 exists
+		assertEquals(null, testVehicle);
 	}
 	
 	
-	/*
+	
+	/**
 	 * testUpdate() method tests Update() method in VehicleDB
 	 * This method gets the id of last Vehicle Instance in allVehicles list from vehicleTestDB
 	 * and updates the year field of that vehicle
@@ -72,6 +78,7 @@ class AutomatedTesting {
 		/*
 		 * dummy instance is what the instance should look like after Update
 		 */
+		//Updating an existing Vehicle instance
 		Vehicle dummy = new Vehicle();
 		dummy.setId(id);
 		dummy.setYear(newYear);
@@ -82,9 +89,15 @@ class AutomatedTesting {
 		assertEquals(dummy.getYear(), testVehicle.getYear());
 		assertEquals(dummy.getMake(), testVehicle.getMake());
 		assertEquals(dummy.getModel(), testVehicle.getModel());
+		
+		//Updating a non-existing Vehicle instance
+		testVehicle = vehicleTestDB.Update(10, newYear, Make, Model);
+				//vehicle instance with id = 10 does not exist
+		assertEquals(null, testVehicle);
+	
 	}
 	
-	/*
+	/**
 	 * testDelete() method tests Delete() method in VehicleDB
 	 * This method deletes the Vehicle instance in VehicleDB with id of 1.
 	 * Then it checks if that instance exists after deletion
@@ -97,25 +110,30 @@ class AutomatedTesting {
 		
 		//Vehicle with id = 1 should not exist, hence null
 		assertEquals(null, vehicleTestDB.Get(delete_id));
-		//Vehicle with id = 3 shoudl exist, hence not null
+		
+		//Vehicle with id = 3 should exist, hence not null
 		assertNotEquals(null, vehicleTestDB.Get(exist_id));
 	}
 	
-	/*
+	/**
 	 * testGetbyID method tests Get(int) method in VehicleDB
 	 * This method gets the Vehicle instance from VehicleDB with matching id
 	 */
 	@Test
 	public void testGetbyID() {
+		//vehicle with id 2 exists
 		int id = 2;
-		Vehicle v = vehicleTestDB.Get(id);
-		assertEquals(2, v.getId());
-		assertEquals(2012, v.getYear());
-		assertEquals("Audi", v.getMake());
-		assertEquals("Sedan", v.getModel());
+		Vehicle testVehicle = vehicleTestDB.Get(id);
+		assertEquals(2, testVehicle.getId());
+		assertEquals(2012, testVehicle.getYear());
+		assertEquals("Audi", testVehicle.getMake());
+		assertEquals("Sedan", testVehicle.getModel());
+		
+		//vehicle with id 10 does not exists
+		assertEquals(null, vehicleTestDB.Get(10));
 	}
 	
-	/*
+	/**
 	 * testGetByValue method tests Get(String) method in VehicleDB
 	 * This method gets Vehicle instances from Vehicle DB with matching Make or Model
 	 */
@@ -162,9 +180,14 @@ class AutomatedTesting {
 			assertEquals(dummyList2.get(i).getMake(), modelTestList.get(i).getMake());
 			assertEquals(dummyList2.get(i).getModel(), modelTestList.get(i).getModel());
 		}
+		
+		//Test 3: Testing text that not match with with either fields
+			//should return empty list
+		text = "Rover";
+		assertTrue(vehicleTestDB.Get(text).isEmpty());
 	}
 	
-	/*
+	/**
 	 * testException method checks for exception cases such as providing null values for Make
 	 * or Model and range for year.
 	 */
@@ -188,9 +211,4 @@ class AutomatedTesting {
 	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Update(1,year2, Make2, Model2));
 
 	}
-	
-	
-	
-	
-
 }

@@ -1,6 +1,11 @@
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ * This is User driven test. This perpose of this test is for me to manually test a functionality and combination of functionalities 
+ * @author Veerendranath Korrapait
+ */
 public class VehicleTest {
 	public static void main(String[] args) {
 	    VehicleDB vehicleDB = new VehicleDB();
