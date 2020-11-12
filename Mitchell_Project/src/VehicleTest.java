@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 
 /**
- * This is User driven test. This perpose of this test is for me to manually test a functionality and combination of functionalities 
- * @author Veerendranath Korrapait
+ * This is User driven test. This purpose of this test is for me to manually test a functionality or combination of functionalities 
+ * @author Veerendranath Korrapati
  */
 public class VehicleTest {
 	public static void main(String[] args) {
@@ -12,7 +12,6 @@ public class VehicleTest {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 
-		System.out.println("hello".contains("h"));
 		int choice = 0;
 		do {
 			System.out.println("Please select from the following options: ");

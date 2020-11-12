@@ -1,3 +1,7 @@
+/*
+ * @author Veerendranath Korrapati
+ */
+
 public class Vehicle {
 	private int Id;
 	private int Year;
@@ -30,8 +34,6 @@ public class Vehicle {
 		this.setMake(Make);
 		this.setModel(Model);
 	}
-	
-	
 	
 	/*
 	 * Defining Getters and Setters for fields: Id, Year, Make, Model
@@ -76,7 +78,7 @@ public class Vehicle {
 			throw new IllegalArgumentException("Invalid Action");
 	}
 	
-	//Returns the values of fields in current object (used for testing purpose)
+	//Returns the values of fields in current object (used for testing purpose in VehicleTest.java)
 	public String toString() {
 		return(
 				"["
@@ -87,6 +89,4 @@ public class Vehicle {
 				+ "]"
 				);
 	}
-	
-	
 }
