@@ -49,6 +49,7 @@ class AutomatedTesting {
 		 */
 		assertEquals(vehicleTestDB.Get().get(size-1), testVehicle);
 		
+		
 		//Creating a Vehicle instance with existing id
 		testVehicle = vehicleTestDB.Create(1,year, Make, Model);
 			//Vehicle with id = 1 exists
@@ -189,6 +190,10 @@ class AutomatedTesting {
 		assertTrue(vehicleTestDB.Get(text).isEmpty());
 	}
 	
+	/**
+	 * testByMakeAndModel method tests Get(make, model) method in VehicleDB
+	 * This method gets Vehicle instances from Vehicle DB with matching Make and Model
+	 */
 	@Test
 	public void testByMakeAndModel() {
 		String make = "BMW";
@@ -210,26 +215,31 @@ class AutomatedTesting {
 	
 	/**
 	 * testException method checks for exception cases such as providing null values for Make
-	 * or Model and range for year.
+	 * or Model and invalid value for year.
 	 */
 	@Test
 	public void testException() {
-		int id = 5;
 		int year1 = 2019;
-		String Make = "";
-		String Model = "i8";
+		String Make1 = "";
+		String Model1 = "i8";
+		List<Vehicle> list  = vehicleTestDB.Get();
 	    
-	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(id,year1, Make, Model));
-
+		//Testing for empty Make
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(5,year1, Make1, Model1));
 	    //I can't use id 5 for the below test cases because in the previous step, Vehicle with object id 5 is not created
+	    //Testing for invalid year
 	    int year2 = 1900;
-	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Update(1,year2, Make, Model));
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(6,year2, Make1, Model1));
 
+	    //Testing for null Make
 		String Make2 = null;
-	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Update(1,year2, Make2, Model));
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(7,year1, Make2, Model1));
 
+	    //Testing for null Model
 	    String Model2 = null;
-	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Update(1,year2, Make2, Model2));
+	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(8,year1, Make1, Model2));
+	    list  = vehicleTestDB.Get();
+	    list  = vehicleTestDB.Get();
 
 	}
 }

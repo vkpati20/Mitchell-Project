@@ -32,7 +32,6 @@ public class Vehicle {
 	}
 	
 	
-	
 	/*
 	 * Defining Getters and Setters for fields: Id, Year, Make, Model
 	 */
@@ -76,7 +75,7 @@ public class Vehicle {
 			throw new IllegalArgumentException("Invalid Action");
 	}
 	
-	//Returns the values of fields in current object (used for testing purpose)
+	//Returns the values of fields in current object (used for testing purpose in VehicleTest.java)
 	public String toString() {
 		return(
 				"["
