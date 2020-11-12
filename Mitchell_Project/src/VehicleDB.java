@@ -4,6 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 
 /*
+ * @author Veerendranath Korrapati
+ */
+
+/*
  * Stores all Vehicle instances
  */
 public class VehicleDB {
@@ -69,7 +73,6 @@ public class VehicleDB {
 			if(model.length()!=0)
 				vehicle.setModel(model);
 		}
-		
 		return vehicle;
 	}
 	

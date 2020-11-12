@@ -1,11 +1,12 @@
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
 import java.util.ArrayList;
-
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+/*
+ * @author Veerendranath Korrapati
+ */
 
 class AutomatedTesting {
 	private VehicleDB vehicleTestDB = new VehicleDB();
@@ -207,11 +208,7 @@ class AutomatedTesting {
 		model = "M5";
 		list = vehicleTestDB.Get(make, model);
 		assertEquals(0,list.size());
-		
-		
 	}
-
-	
 	
 	/**
 	 * testException method checks for exception cases such as providing null values for Make
@@ -222,11 +219,10 @@ class AutomatedTesting {
 		int year1 = 2019;
 		String Make1 = "";
 		String Model1 = "i8";
-		List<Vehicle> list  = vehicleTestDB.Get();
 	    
 		//Testing for empty Make
 	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(5,year1, Make1, Model1));
-	    //I can't use id 5 for the below test cases because in the previous step, Vehicle with object id 5 is not created
+	    
 	    //Testing for invalid year
 	    int year2 = 1900;
 	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(6,year2, Make1, Model1));
@@ -238,8 +234,5 @@ class AutomatedTesting {
 	    //Testing for null Model
 	    String Model2 = null;
 	    assertThrows(IllegalArgumentException.class, () -> vehicleTestDB.Create(8,year1, Make1, Model2));
-	    list  = vehicleTestDB.Get();
-	    list  = vehicleTestDB.Get();
-
 	}
 }
